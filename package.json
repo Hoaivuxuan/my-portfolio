@@ -26,7 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "@iconify/react": "^5.2.1"
+    "@iconify/react": "^5.2.1",
+    "jest": "^27.5.1"
   }
 }
