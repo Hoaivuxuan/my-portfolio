@@ -1,7 +1,11 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+/**
+ * @jest-environment jsdom
+ */
+
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 // Write unit test
-test('renders learn react link', () => {
+test("renders learn react link", () => {
   render(<App />);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();

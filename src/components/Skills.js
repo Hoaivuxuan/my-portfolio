@@ -1,9 +1,7 @@
 // src/components/Skills.js
 
 import { BadgeCheckIcon, ChipIcon } from "@heroicons/react/solid";
-import { Icon } from "@iconify/react";
 import React, { useState } from "react";
-import { skills } from "../data";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
