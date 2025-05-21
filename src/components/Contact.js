@@ -1,33 +1,39 @@
 // src/components/Contact.js
 
-import React from "react";
+import React, { useRef, useState, forwardRef } from "react";
+import emailjs from "@emailjs/browser";
 
-export default function Contact() {
-  // const [name, setName] = React.useState("");
-  // const [email, setEmail] = React.useState("");
-  // const [message, setMessage] = React.useState("");
+const Contact = forwardRef(({ workRef }, ref) => {
+  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
-  // function encode(data) {
-  //     return Object.keys(data)
-  //         .map(
-  //             (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
-  //         )
-  //         .join("&");
-  // }
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
 
-  // function handleSubmit(e) {
-  //     e.preventDefault();
-  //     fetch("/", {
-  //         method: "POST",
-  //         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  //         body: encode({ "form-name": "contact", name, email, message }),
-  //     })
-  //         .then(() => alert("Message sent!"))
-  //         .catch((error) => alert(error));
-  // }
+    emailjs
+      .sendForm(
+        "service_a4y9f8m", // Replace with your EmailJS service ID
+        "template_w41hxxw", // Replace with your EmailJS template ID
+        form.current,
+        "NCxVULxrlCtG67Km3" // Replace with your EmailJS public key
+      )
+      .then((result) => {
+        setSubmitStatus("success");
+        form.current.reset();
+      })
+      .catch((error) => {
+        setSubmitStatus("error");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
 
   return (
-    <section id="contact" className="relative">
+    <section id="contact" className="relative" ref={ref}>
       <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
         <div className="lg:w-2/3 md:w-1/2 bg-gray-900 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
           <iframe
@@ -67,8 +73,8 @@ export default function Contact() {
           </div>
         </div>
         <form
-          netlify
-          name="contact"
+          ref={form}
+          onSubmit={sendEmail}
           className="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
         >
           <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font">
@@ -115,12 +121,27 @@ export default function Contact() {
           </div>
           <button
             type="submit"
-            className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            disabled={isSubmitting}
+            className={`text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Submit
+            {isSubmitting ? "Sending..." : "Submit"}
           </button>
+          {submitStatus === "success" && (
+            <p className="mt-3 text-green-500">
+              Message sent successfully!
+            </p>
+          )}
+          {submitStatus === "error" && (
+            <p className="mt-3 text-red-500">
+              Failed to send message. Please try again.
+            </p>
+          )}
         </form>
       </div>
     </section>
   );
-}
+});
+
+export default Contact;

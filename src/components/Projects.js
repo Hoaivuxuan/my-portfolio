@@ -1,16 +1,16 @@
 // src/components/Projects.js
 
 import { CodeIcon } from "@heroicons/react/solid";
-import React from "react";
+import React, { forwardRef } from "react";
 import { projects } from "../data";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-export default function Projects({ workRef }) {
+const Projects = forwardRef(function Projects({ workRef }, ref) {
   return (
     <section
       id="projects"
       className="text-gray-400 bg-gray-900 body-font"
-      ref={workRef}
+      ref={ref}
     >
       <div className="container px-5 py-10 mx-auto text-center lg:px-40">
         <div className="flex flex-col w-full mb-20">
@@ -25,7 +25,7 @@ export default function Projects({ workRef }) {
         </div>
         <div className="flex flex-wrap -m-4">
           {projects.map((project) => (
-            <a key={project.image} className="sm:w-1/2 w-100 p-4">
+            <div key={project.image} className="sm:w-1/2 w-100 p-4">
               <div className="flex relative">
                 <img
                   alt="Projects"
@@ -41,21 +41,25 @@ export default function Projects({ workRef }) {
                   </h1>
                   <p className="leading-relaxed">{project.description}</p>
                   <br />
-                  <a
-                    component="a"
-                    target="_blank"
-                    href={project.link}
-                    style={{ color: "lightblue" }}
-                  >
-                    View
-                    <ArrowForwardIcon />
-                  </a>
+                  {project.link && (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "lightblue" }}
+                    >
+                      View
+                      <ArrowForwardIcon />
+                    </a>
+                  )}
                 </div>
               </div>
-            </a>
+            </div>
           ))}
         </div>
       </div>
     </section>
   );
-}
+});
+
+export default Projects;

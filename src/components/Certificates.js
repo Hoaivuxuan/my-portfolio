@@ -1,6 +1,6 @@
 // src/components/Certificates
 
-import React from "react";
+import React, { useState, forwardRef } from "react";
 import { TerminalIcon, UsersIcon } from "@heroicons/react/solid";
 import { certificates } from "../data";
 import { Box, Typography, Button, Modal } from "@mui/material";
@@ -90,7 +90,7 @@ const jobDetails = {
   },
 };
 
-export default function Certificates() {
+const Certificates = forwardRef((props, ref) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -111,7 +111,7 @@ export default function Certificates() {
   };
 
   return (
-    <section id="certificates">
+    <section id="certificates" ref={ref}>
       <div className="container px-5 py-10 mx-auto text-center">
         <UsersIcon className="w-10 inline-block mb-4" />
         <h1 className="sm:text-4xl text-3xl font-medium title-font text-white mb-12">
@@ -428,4 +428,6 @@ export default function Certificates() {
       </Modal>
     </section>
   );
-}
+});
+
+export default Certificates;

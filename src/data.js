@@ -15,7 +15,7 @@ export const projects = [
     description:
       "Customer relationship management software is a comprehensive solution designed to support businesses in customer management, optimizing customer care processes, increasing customer experience and building customer loyalty.",
     image: "https://base.vn/wp-content/uploads/2024/09/crm-la-gi.webp",
-    link: "",
+    link: "https://github.com/Hoaivuxuan/crm-system",
   },
 ];
 

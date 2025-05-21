@@ -1,9 +1,9 @@
 // src/components/About.js
 
-import React from "react";
+import React, { forwardRef } from "react";
 import Hoai_Vu_Xuan_Resume from "./Hoai_Vu_Xuan_Resume.pdf";
 
-export default function About() {
+const About = forwardRef((props, ref) => {
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = "../../public/Hoai_Vu_Xuan_Resume.pdf";
@@ -14,7 +14,7 @@ export default function About() {
   };
 
   return (
-    <section id="about">
+    <section id="about" ref={ref}>
       <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
           <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
@@ -59,4 +59,6 @@ export default function About() {
       </div>
     </section>
   );
-}
+});
+
+export default About;

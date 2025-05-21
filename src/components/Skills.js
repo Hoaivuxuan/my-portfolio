@@ -1,7 +1,9 @@
 // src/components/Skills.js
 
 import { BadgeCheckIcon, ChipIcon } from "@heroicons/react/solid";
-import React, { useState } from "react";
+import { Icon } from "@iconify/react";
+import React, { useState, forwardRef } from "react";
+import { skills } from "../data";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -206,7 +208,7 @@ const accordionItems = [
   },
 ];
 
-export default function Skills() {
+const Skills = forwardRef((props, ref) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -214,7 +216,7 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills">
+    <section id="skills" ref={ref}>
       <div className="container px-5 py-10 mx-auto">
         <div className="text-center mb-20">
           <ChipIcon className="w-10 inline-block mb-4" />
@@ -293,4 +295,6 @@ export default function Skills() {
       </div>
     </section>
   );
-}
+});
+
+export default Skills;
