@@ -1,7 +1,7 @@
 # React-Portfolio
 A simple portfolio page built with ReactJS.
 
-![portfolio](./public/portfolio.png)
+https://hoaivudev.id.vn/
 
 ## Getting Started with Create React App
 
